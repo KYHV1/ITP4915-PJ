@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2025 at 05:53 AM
+-- Generation Time: Jun 05, 2025 at 05:31 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -145,6 +145,31 @@ INSERT INTO `inventory` (`inventoryID`, `productID`, `quantity`, `lowStockThresh
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `inward_goods`
+--
+
+CREATE TABLE `inward_goods` (
+  `recordID` varchar(16) NOT NULL,
+  `productID` varchar(16) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `supplierID` varchar(16) NOT NULL,
+  `receivedBy` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `inward_goods`
+--
+
+INSERT INTO `inward_goods` (`recordID`, `productID`, `quantity`, `supplierID`, `receivedBy`) VALUES
+('a1b2c3d4', 'P001', 10, 'S001', 'Alice'),
+('e5f6g7h8', 'P002', 25, 'S002', 'Bob'),
+('i9j0k1l2', 'P003', 15, 'S001', 'Charlie'),
+('m3n4o5p6', 'P001', 20, 'S003', 'Diana'),
+('q7r8s9t0', 'P002', 12, 'S002', 'Edward');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `logistics`
 --
 
@@ -240,6 +265,31 @@ CREATE TABLE `production_schedule` (
 INSERT INTO `production_schedule` (`scheduleID`, `orderID`, `productID`, `startDate`, `endDate`, `resourcesAssigned`, `status`) VALUES
 ('SCH1', '101', '1', '2025-06-02', '2025-06-08', 'Machine A, 2 Workers', 'Planned'),
 ('SCH2', '102', '2', '2025-06-03', '2025-06-10', 'Machine B, 3 Workers', 'InProgress');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `servicerequest`
+--
+
+CREATE TABLE `servicerequest` (
+  `Id` int(11) NOT NULL,
+  `Customer` varchar(100) NOT NULL,
+  `Date` date NOT NULL,
+  `Description` text DEFAULT NULL,
+  `Status` varchar(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `servicerequest`
+--
+
+INSERT INTO `servicerequest` (`Id`, `Customer`, `Date`, `Description`, `Status`) VALUES
+(1, 'Alice', '2025-06-03', 'Complaint about product', 'Pending'),
+(2, 'Bob', '2025-06-04', 'Request for repair', 'In Progress'),
+(3, 'Charlie', '2025-06-05', 'General inquiry', 'Completed'),
+(4, 'Diana', '2025-06-02', 'Follow-up on previous service', 'Pending'),
+(5, 'Edward', '2025-06-01', 'Warranty information request', 'Completed');
 
 -- --------------------------------------------------------
 
@@ -349,6 +399,12 @@ ALTER TABLE `inventory`
   ADD KEY `productID` (`productID`);
 
 --
+-- Indexes for table `inward_goods`
+--
+ALTER TABLE `inward_goods`
+  ADD PRIMARY KEY (`recordID`);
+
+--
 -- Indexes for table `logistics`
 --
 ALTER TABLE `logistics`
@@ -380,6 +436,12 @@ ALTER TABLE `production_schedule`
   ADD KEY `productID` (`productID`);
 
 --
+-- Indexes for table `servicerequest`
+--
+ALTER TABLE `servicerequest`
+  ADD PRIMARY KEY (`Id`);
+
+--
 -- Indexes for table `supplier`
 --
 ALTER TABLE `supplier`
@@ -399,6 +461,16 @@ ALTER TABLE `system_logs`
 ALTER TABLE `training`
   ADD PRIMARY KEY (`trainingID`),
   ADD KEY `employeeID` (`employeeID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `servicerequest`
+--
+ALTER TABLE `servicerequest`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
