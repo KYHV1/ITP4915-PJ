@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2025 at 05:31 AM
+-- Generation Time: Jun 05, 2025 at 09:15 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -156,17 +156,6 @@ CREATE TABLE `inward_goods` (
   `receivedBy` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `inward_goods`
---
-
-INSERT INTO `inward_goods` (`recordID`, `productID`, `quantity`, `supplierID`, `receivedBy`) VALUES
-('a1b2c3d4', 'P001', 10, 'S001', 'Alice'),
-('e5f6g7h8', 'P002', 25, 'S002', 'Bob'),
-('i9j0k1l2', 'P003', 15, 'S001', 'Charlie'),
-('m3n4o5p6', 'P001', 20, 'S003', 'Diana'),
-('q7r8s9t0', 'P002', 12, 'S002', 'Edward');
-
 -- --------------------------------------------------------
 
 --
@@ -279,17 +268,6 @@ CREATE TABLE `servicerequest` (
   `Description` text DEFAULT NULL,
   `Status` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `servicerequest`
---
-
-INSERT INTO `servicerequest` (`Id`, `Customer`, `Date`, `Description`, `Status`) VALUES
-(1, 'Alice', '2025-06-03', 'Complaint about product', 'Pending'),
-(2, 'Bob', '2025-06-04', 'Request for repair', 'In Progress'),
-(3, 'Charlie', '2025-06-05', 'General inquiry', 'Completed'),
-(4, 'Diana', '2025-06-02', 'Follow-up on previous service', 'Pending'),
-(5, 'Edward', '2025-06-01', 'Warranty information request', 'Completed');
 
 -- --------------------------------------------------------
 
