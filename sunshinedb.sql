@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- 主機： 127.0.0.1
--- 產生時間： 2025-06-18 16:06:34
--- 伺服器版本： 10.4.32-MariaDB
--- PHP 版本： 8.0.30
+-- Host: 127.0.0.1
+-- Generation Time: Jun 24, 2025 at 08:30 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- 資料庫： `sunshinedb`
+-- Database: `sunshinedb`
 --
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `customer`
+-- Table structure for table `customer`
 --
 
 CREATE TABLE `customer` (
@@ -39,7 +39,7 @@ CREATE TABLE `customer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 傾印資料表的資料 `customer`
+-- Dumping data for table `customer`
 --
 
 INSERT INTO `customer` (`customerID`, `customerName`, `email`, `phone`, `address`, `preferredLanguage`, `createdAt`, `updatedAt`) VALUES
@@ -62,7 +62,7 @@ INSERT INTO `customer` (`customerID`, `customerName`, `email`, `phone`, `address
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `customer_interactions`
+-- Table structure for table `customer_interactions`
 --
 
 CREATE TABLE `customer_interactions` (
@@ -74,7 +74,7 @@ CREATE TABLE `customer_interactions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 傾印資料表的資料 `customer_interactions`
+-- Dumping data for table `customer_interactions`
 --
 
 INSERT INTO `customer_interactions` (`interactionID`, `customerID`, `interactionType`, `interactionDate`, `details`) VALUES
@@ -84,7 +84,7 @@ INSERT INTO `customer_interactions` (`interactionID`, `customerID`, `interaction
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `employee`
+-- Table structure for table `employee`
 --
 
 CREATE TABLE `employee` (
@@ -96,7 +96,7 @@ CREATE TABLE `employee` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 傾印資料表的資料 `employee`
+-- Dumping data for table `employee`
 --
 
 INSERT INTO `employee` (`employeeID`, `password`, `department`, `role`, `lastLogin`) VALUES
@@ -158,7 +158,7 @@ INSERT INTO `employee` (`employeeID`, `password`, `department`, `role`, `lastLog
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `feedback`
+-- Table structure for table `feedback`
 --
 
 CREATE TABLE `feedback` (
@@ -171,7 +171,7 @@ CREATE TABLE `feedback` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 傾印資料表的資料 `feedback`
+-- Dumping data for table `feedback`
 --
 
 INSERT INTO `feedback` (`feedbackID`, `customerID`, `feedbackType`, `feedbackDate`, `content`, `rating`) VALUES
@@ -181,7 +181,7 @@ INSERT INTO `feedback` (`feedbackID`, `customerID`, `feedbackType`, `feedbackDat
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `inventory`
+-- Table structure for table `inventory`
 --
 
 CREATE TABLE `inventory` (
@@ -193,7 +193,7 @@ CREATE TABLE `inventory` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 傾印資料表的資料 `inventory`
+-- Dumping data for table `inventory`
 --
 
 INSERT INTO `inventory` (`inventoryID`, `productID`, `quantity`, `lowStockThreshold`, `lastUpdated`) VALUES
@@ -204,33 +204,28 @@ INSERT INTO `inventory` (`inventoryID`, `productID`, `quantity`, `lowStockThresh
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `inward_goods`
+-- Table structure for table `inward_goods`
 --
 
 CREATE TABLE `inward_goods` (
-  `recordID` varchar(100) NOT NULL,
-  `productID` varchar(100) NOT NULL,
+  `recordID` varchar(50) NOT NULL,
+  `productID` varchar(50) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `supplierID` varchar(16) NOT NULL,
-  `receivedBy` varchar(100) NOT NULL
+  `supplierID` varchar(50) NOT NULL,
+  `receivedBy` varchar(100) NOT NULL,
+  `receivedDate` datetime NOT NULL,
+  `batchNo` varchar(100) DEFAULT NULL,
+  `expiryDate` datetime DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `createdAt` datetime NOT NULL DEFAULT current_timestamp(),
+  `createdBy` varchar(100) DEFAULT NULL,
+  `poID` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- 傾印資料表的資料 `inward_goods`
---
-
-INSERT INTO `inward_goods` (`recordID`, `productID`, `quantity`, `supplierID`, `receivedBy`) VALUES
-('5d920f5e', '1', 1, 'SUP1', 'dasdas'),
-('a1b2c3d4', 'P001', 10, 'S001', 'Alice'),
-('e5f6g7h8', 'P002', 25, 'S002', 'Bob'),
-('i9j0k1l2', 'P003', 15, 'S001', 'Charlie'),
-('m3n4o5p6', 'P001', 20, 'S003', 'Diana'),
-('q7r8s9t0', 'P002', 12, 'S002', 'Edward');
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `logistics`
+-- Table structure for table `logistics`
 --
 
 CREATE TABLE `logistics` (
@@ -243,7 +238,7 @@ CREATE TABLE `logistics` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 傾印資料表的資料 `logistics`
+-- Dumping data for table `logistics`
 --
 
 INSERT INTO `logistics` (`trackingID`, `orderID`, `currentLocation`, `status`, `estimatedDelivery`, `lastUpdated`) VALUES
@@ -253,7 +248,7 @@ INSERT INTO `logistics` (`trackingID`, `orderID`, `currentLocation`, `status`, `
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `orders`
+-- Table structure for table `orders`
 --
 
 CREATE TABLE `orders` (
@@ -269,7 +264,7 @@ CREATE TABLE `orders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 傾印資料表的資料 `orders`
+-- Dumping data for table `orders`
 --
 
 INSERT INTO `orders` (`orderID`, `orderDate`, `requiredDate`, `status`, `customerID`, `productID`, `quantity`, `trackingID`, `updatedAt`) VALUES
@@ -280,7 +275,39 @@ INSERT INTO `orders` (`orderID`, `orderDate`, `requiredDate`, `status`, `custome
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `product`
+-- Table structure for table `procurement`
+--
+
+CREATE TABLE `procurement` (
+  `poID` varchar(50) NOT NULL,
+  `supplierID` varchar(50) NOT NULL,
+  `orderDate` datetime NOT NULL,
+  `orderedBy` varchar(100) NOT NULL,
+  `status` varchar(30) NOT NULL DEFAULT 'Open',
+  `remarks` varchar(255) DEFAULT NULL,
+  `createdAt` datetime NOT NULL DEFAULT current_timestamp(),
+  `createdBy` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `procurement_items`
+--
+
+CREATE TABLE `procurement_items` (
+  `poItemID` int(11) NOT NULL,
+  `poID` varchar(50) NOT NULL,
+  `productID` varchar(50) NOT NULL,
+  `quantityOrdered` int(11) NOT NULL,
+  `quantityReceived` int(11) NOT NULL DEFAULT 0,
+  `remarks` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product`
 --
 
 CREATE TABLE `product` (
@@ -294,7 +321,7 @@ CREATE TABLE `product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 傾印資料表的資料 `product`
+-- Dumping data for table `product`
 --
 
 INSERT INTO `product` (`productID`, `productName`, `description`, `price`, `supplierID`, `isCanceled`, `createTime`) VALUES
@@ -317,7 +344,7 @@ INSERT INTO `product` (`productID`, `productName`, `description`, `price`, `supp
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `production`
+-- Table structure for table `production`
 --
 
 CREATE TABLE `production` (
@@ -328,7 +355,7 @@ CREATE TABLE `production` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- 傾印資料表的資料 `production`
+-- Dumping data for table `production`
 --
 
 INSERT INTO `production` (`productionID`, `productName`, `quantity`, `status`) VALUES
@@ -341,7 +368,7 @@ INSERT INTO `production` (`productionID`, `productName`, `quantity`, `status`) V
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `production_schedule`
+-- Table structure for table `production_schedule`
 --
 
 CREATE TABLE `production_schedule` (
@@ -355,7 +382,7 @@ CREATE TABLE `production_schedule` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 傾印資料表的資料 `production_schedule`
+-- Dumping data for table `production_schedule`
 --
 
 INSERT INTO `production_schedule` (`scheduleID`, `orderID`, `productID`, `startDate`, `endDate`, `resourcesAssigned`, `status`) VALUES
@@ -365,7 +392,7 @@ INSERT INTO `production_schedule` (`scheduleID`, `orderID`, `productID`, `startD
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `servicerequest`
+-- Table structure for table `servicerequest`
 --
 
 CREATE TABLE `servicerequest` (
@@ -373,24 +400,27 @@ CREATE TABLE `servicerequest` (
   `Customer` varchar(100) NOT NULL,
   `Date` date NOT NULL,
   `Description` text DEFAULT NULL,
-  `Status` varchar(32) NOT NULL
+  `Status` varchar(32) NOT NULL,
+  `AssignedTo` varchar(100) DEFAULT NULL,
+  `AttachmentPath` varchar(255) DEFAULT NULL,
+  `Comments` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 傾印資料表的資料 `servicerequest`
+-- Dumping data for table `servicerequest`
 --
 
-INSERT INTO `servicerequest` (`Id`, `Customer`, `Date`, `Description`, `Status`) VALUES
-(1, 'Alice', '2025-06-03', 'Complaint about product', 'Pending'),
-(2, 'Bob', '2025-06-04', 'Request for repair', 'In Progress'),
-(3, 'Charlie', '2025-06-05', 'General inquiry', 'Completed'),
-(4, 'Diana', '2025-06-02', 'Follow-up on previous service', 'Pending'),
-(5, 'Edward', '2025-06-01', 'Warranty information request', 'Completed');
+INSERT INTO `servicerequest` (`Id`, `Customer`, `Date`, `Description`, `Status`, `AssignedTo`, `AttachmentPath`, `Comments`) VALUES
+(1, 'Alice', '2025-06-03', 'Complaint about product', 'Pending', 'Charlie', 'C:\\Users\\ILVANE\\Desktop\\g.jpeg', 'hi'),
+(2, 'Bob', '2025-06-04', 'Request for repair', 'In Progress', NULL, NULL, NULL),
+(3, 'Charlie', '2025-06-05', 'General inquiry', 'Completed', NULL, NULL, NULL),
+(4, 'Diana', '2025-06-02', 'Follow-up on previous service', 'Pending', NULL, NULL, NULL),
+(5, 'Edward', '2025-06-01', 'Warranty information request', 'Completed', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `supplier`
+-- Table structure for table `supplier`
 --
 
 CREATE TABLE `supplier` (
@@ -404,7 +434,7 @@ CREATE TABLE `supplier` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 傾印資料表的資料 `supplier`
+-- Dumping data for table `supplier`
 --
 
 INSERT INTO `supplier` (`supplierID`, `supplierName`, `contactEmail`, `contactPhone`, `address`, `productCategories`, `performanceRating`) VALUES
@@ -415,7 +445,7 @@ INSERT INTO `supplier` (`supplierID`, `supplierName`, `contactEmail`, `contactPh
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `system_logs`
+-- Table structure for table `system_logs`
 --
 
 CREATE TABLE `system_logs` (
@@ -427,7 +457,7 @@ CREATE TABLE `system_logs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 傾印資料表的資料 `system_logs`
+-- Dumping data for table `system_logs`
 --
 
 INSERT INTO `system_logs` (`logID`, `userID`, `action`, `logDate`, `details`) VALUES
@@ -437,7 +467,7 @@ INSERT INTO `system_logs` (`logID`, `userID`, `action`, `logDate`, `details`) VA
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `training`
+-- Table structure for table `training`
 --
 
 CREATE TABLE `training` (
@@ -450,65 +480,67 @@ CREATE TABLE `training` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 傾印資料表的資料 `training`
+-- Dumping data for table `training`
 --
 
 INSERT INTO `training` (`trainingID`, `employeeID`, `trainingType`, `trainingDate`, `description`, `completionStatus`) VALUES
 ('TRN1', '1001', 'Online', '2025-06-10', 'Inventory Management Course', 'NotStarted');
 
 --
--- 已傾印資料表的索引
+-- Indexes for dumped tables
 --
 
 --
--- 資料表索引 `customer`
+-- Indexes for table `customer`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`customerID`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- 資料表索引 `customer_interactions`
+-- Indexes for table `customer_interactions`
 --
 ALTER TABLE `customer_interactions`
   ADD PRIMARY KEY (`interactionID`),
   ADD KEY `customerID` (`customerID`);
 
 --
--- 資料表索引 `employee`
+-- Indexes for table `employee`
 --
 ALTER TABLE `employee`
   ADD PRIMARY KEY (`employeeID`);
 
 --
--- 資料表索引 `feedback`
+-- Indexes for table `feedback`
 --
 ALTER TABLE `feedback`
   ADD PRIMARY KEY (`feedbackID`),
   ADD KEY `customerID` (`customerID`);
 
 --
--- 資料表索引 `inventory`
+-- Indexes for table `inventory`
 --
 ALTER TABLE `inventory`
   ADD PRIMARY KEY (`inventoryID`),
   ADD KEY `productID` (`productID`);
 
 --
--- 資料表索引 `inward_goods`
+-- Indexes for table `inward_goods`
 --
 ALTER TABLE `inward_goods`
-  ADD PRIMARY KEY (`recordID`);
+  ADD PRIMARY KEY (`recordID`),
+  ADD KEY `fk_inward_goods_poID` (`poID`),
+  ADD KEY `fk_inward_goods_productID` (`productID`);
 
 --
--- 資料表索引 `logistics`
+-- Indexes for table `logistics`
 --
 ALTER TABLE `logistics`
   ADD PRIMARY KEY (`trackingID`),
   ADD KEY `orderID` (`orderID`);
 
 --
--- 資料表索引 `orders`
+-- Indexes for table `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`orderID`),
@@ -517,20 +549,35 @@ ALTER TABLE `orders`
   ADD KEY `trackingID` (`trackingID`);
 
 --
--- 資料表索引 `product`
+-- Indexes for table `procurement`
+--
+ALTER TABLE `procurement`
+  ADD PRIMARY KEY (`poID`),
+  ADD KEY `fk_procurement_supplierID` (`supplierID`);
+
+--
+-- Indexes for table `procurement_items`
+--
+ALTER TABLE `procurement_items`
+  ADD PRIMARY KEY (`poItemID`),
+  ADD KEY `fk_procurement_items_poID` (`poID`),
+  ADD KEY `fk_procurement_items_productID` (`productID`);
+
+--
+-- Indexes for table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`productID`),
   ADD KEY `supplierID` (`supplierID`);
 
 --
--- 資料表索引 `production`
+-- Indexes for table `production`
 --
 ALTER TABLE `production`
   ADD PRIMARY KEY (`productionID`);
 
 --
--- 資料表索引 `production_schedule`
+-- Indexes for table `production_schedule`
 --
 ALTER TABLE `production_schedule`
   ADD PRIMARY KEY (`scheduleID`),
@@ -538,78 +585,91 @@ ALTER TABLE `production_schedule`
   ADD KEY `productID` (`productID`);
 
 --
--- 資料表索引 `servicerequest`
+-- Indexes for table `servicerequest`
 --
 ALTER TABLE `servicerequest`
   ADD PRIMARY KEY (`Id`);
 
 --
--- 資料表索引 `supplier`
+-- Indexes for table `supplier`
 --
 ALTER TABLE `supplier`
   ADD PRIMARY KEY (`supplierID`),
   ADD UNIQUE KEY `contactEmail` (`contactEmail`);
 
 --
--- 資料表索引 `system_logs`
+-- Indexes for table `system_logs`
 --
 ALTER TABLE `system_logs`
   ADD PRIMARY KEY (`logID`),
   ADD KEY `userID` (`userID`);
 
 --
--- 資料表索引 `training`
+-- Indexes for table `training`
 --
 ALTER TABLE `training`
   ADD PRIMARY KEY (`trainingID`),
   ADD KEY `employeeID` (`employeeID`);
 
 --
--- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `production`
+-- AUTO_INCREMENT for table `procurement_items`
+--
+ALTER TABLE `procurement_items`
+  MODIFY `poItemID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `production`
 --
 ALTER TABLE `production`
   MODIFY `productionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `servicerequest`
+-- AUTO_INCREMENT for table `servicerequest`
 --
 ALTER TABLE `servicerequest`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- 已傾印資料表的限制式
+-- Constraints for dumped tables
 --
 
 --
--- 資料表的限制式 `customer_interactions`
+-- Constraints for table `customer_interactions`
 --
 ALTER TABLE `customer_interactions`
   ADD CONSTRAINT `customer_interactions_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `customer` (`customerID`) ON DELETE CASCADE;
 
 --
--- 資料表的限制式 `feedback`
+-- Constraints for table `feedback`
 --
 ALTER TABLE `feedback`
   ADD CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `customer` (`customerID`) ON DELETE CASCADE;
 
 --
--- 資料表的限制式 `inventory`
+-- Constraints for table `inventory`
 --
 ALTER TABLE `inventory`
   ADD CONSTRAINT `inventory_ibfk_1` FOREIGN KEY (`productID`) REFERENCES `product` (`productID`) ON DELETE CASCADE;
 
 --
--- 資料表的限制式 `logistics`
+-- Constraints for table `inward_goods`
+--
+ALTER TABLE `inward_goods`
+  ADD CONSTRAINT `fk_inward_goods_poID` FOREIGN KEY (`poID`) REFERENCES `procurement` (`poID`),
+  ADD CONSTRAINT `fk_inward_goods_productID` FOREIGN KEY (`productID`) REFERENCES `product` (`productID`);
+
+--
+-- Constraints for table `logistics`
 --
 ALTER TABLE `logistics`
   ADD CONSTRAINT `logistics_ibfk_1` FOREIGN KEY (`orderID`) REFERENCES `orders` (`orderID`) ON DELETE CASCADE;
 
 --
--- 資料表的限制式 `orders`
+-- Constraints for table `orders`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `customer` (`customerID`),
@@ -617,26 +677,39 @@ ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`trackingID`) REFERENCES `logistics` (`trackingID`) ON DELETE SET NULL;
 
 --
--- 資料表的限制式 `product`
+-- Constraints for table `procurement`
+--
+ALTER TABLE `procurement`
+  ADD CONSTRAINT `fk_procurement_supplierID` FOREIGN KEY (`supplierID`) REFERENCES `supplier` (`supplierID`);
+
+--
+-- Constraints for table `procurement_items`
+--
+ALTER TABLE `procurement_items`
+  ADD CONSTRAINT `fk_procurement_items_poID` FOREIGN KEY (`poID`) REFERENCES `procurement` (`poID`),
+  ADD CONSTRAINT `fk_procurement_items_productID` FOREIGN KEY (`productID`) REFERENCES `product` (`productID`);
+
+--
+-- Constraints for table `product`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`supplierID`) REFERENCES `supplier` (`supplierID`) ON DELETE SET NULL;
 
 --
--- 資料表的限制式 `production_schedule`
+-- Constraints for table `production_schedule`
 --
 ALTER TABLE `production_schedule`
   ADD CONSTRAINT `production_schedule_ibfk_1` FOREIGN KEY (`orderID`) REFERENCES `orders` (`orderID`) ON DELETE CASCADE,
   ADD CONSTRAINT `production_schedule_ibfk_2` FOREIGN KEY (`productID`) REFERENCES `product` (`productID`);
 
 --
--- 資料表的限制式 `system_logs`
+-- Constraints for table `system_logs`
 --
 ALTER TABLE `system_logs`
   ADD CONSTRAINT `system_logs_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `employee` (`employeeID`) ON DELETE SET NULL;
 
 --
--- 資料表的限制式 `training`
+-- Constraints for table `training`
 --
 ALTER TABLE `training`
   ADD CONSTRAINT `training_ibfk_1` FOREIGN KEY (`employeeID`) REFERENCES `employee` (`employeeID`) ON DELETE CASCADE;
